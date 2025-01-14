@@ -34,10 +34,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-m&!il93%nfu7oky6+w4)g07uohu(=#y83n-u7$f93hiixeuc4)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 
@@ -89,12 +88,12 @@ MEDIA_URL = '/media/'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 # DATABASES = {
 #     'default': {
@@ -107,9 +106,9 @@ MEDIA_URL = '/media/'
 #     }
 # }
 
-DATABASES = {
-    'default' : dj_database_url.parse(config('DATABASE_URL'))
-}
+# DATABASES = {
+#     'default' : dj_database_url.parse(config('DATABASE_URL'))
+# }
 
 
 # Password validation
