@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ photo.title }}{% endblock %}
+
+{% block content %}
+<div class="flex items-center justify-center min-h-screen bg-gray-400">
+    <div class="bg-blue-300 p-8 rounded-lg shadow-md w-full max-w-2xl">
+        {% if user == photo.user %}
+            <div class="flex justify-end space-x-4 mb-6">
+                <a href="{% url 'edit_photo' photo.id %}" 
+                   class="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-300">
+                    Edit
+                </a>
+                <a href="{% url 'delete_photo' photo.id %}" 
+                   class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300">
+                    Delete
+                </a>
+            </div>
+        {% endif %}
+
+        <h1 class="text-3xl font-bold text-gray-800 mb-4">{{ photo.title }}</h1>
+        <img src="{{ photo.image.url }}" alt="{{ photo.title }}" class="rounded mb
+        <p class="text-gray-700 mb-4">{{ photo.description }}</p>
+        <p class="text-gray-600 italic mb-4">Tags: {{ photo.tags }}</p>
+        <p class="text-gray-700 mb-6">
+            <span class="text-green-500">Likes: {{ photo.likes }}</span> | 
+            <span class="text-red-500">Dislikes: {{ photo.dislikes }}</span>
+        </p>
+        
+        <div class="space-x-4">
+            <a href="{% url 'like_photo' photo.id %}" 
+               class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300">
+                Like
+            </a>
+            <a href="{% url 'dislike_photo' photo.id %}" 
+               class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300">
+                Dislike
+            </a>
+            <a href="{% url 'home' %}" 
+               class="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400">
+                Back to Home
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

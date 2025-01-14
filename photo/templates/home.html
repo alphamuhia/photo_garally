@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Photo Gallery{% endblock %}
+
+{% block content %}
+<div class="bg-gray-400 min-h-screen py-8">
+    <div class="max-w-5xl mx-auto px-4">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">Photo Gallery</h1>
+
+        {% if user.is_authenticated %}
+            <div class="mb-6 text-center">
+                <p class="text-lg text-gray-700">
+                    Welcome, <span class="font-semibold text-gray-900">{{ user.username }}</span>! 
+                    <a href="{% url 'logout' %}" class="text-blue-600 hover:underline">Logout</a>
+                </p>
+                <div class="mt-4 space-x-6">
+                    <a href="{% url 'add_photo' %}" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Add Photo</a>
+                    <a href="{% url 'profile' %}" class="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300">Profile</a>
+                </div>
+            </div>
+        {% else %}
+            <div class="mb-6 text-center">
+                <p class="text-lg text-gray-700">
+                    <a href="{% url 'login' %}" class="text-blue-900 hover:underline">Login</a> | 
+                    <a href="{% url 'register' %}" class="text-blue-900 hover:underline">Register</a>
+                </p>
+            </div>
+        {% endif %}
+
+        <div class="grid  md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {% for photo in photos %}
+                <div class="bg-gray-700 rounded-lg shadow hover:shadow-lg p-4">
+                    <h2 class="text-xl font-semibold text-blue-200 mb-2">{{ photo.title }}</h2>
+                    <img src="{{ photo.image.url }}" alt="{{ photo.title }}" class="rounded mb-4 w-full h-48 object-cover">
+                    <p class="text-white text-sm mb-2">{{ photo.description }}</p>
+                    <p class="text-sm text-white mb-2">Tags: <span class="italic">{{ photo.tags }}</span></p>
+                    <p class="text-sm text-blue-400 mb-4">Likes: <span class="text-green-500">{{ photo.likes }}</span> | Dislikes: <span class="text-red-500">{{ photo.dislikes }}</span></p>
+                    <div class="space-x-4">
+                        <a href="{% url 'photo_details' photo.id %}" class="text-blue-500 hover:underline">View Details</a>
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'like_photo' photo.id %}" class="text-green-600 hover:underline">Like</a>
+                            <a href="{% url 'dislike_photo' photo.id %}" class="text-red-600 hover:underline">Dislike</a>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

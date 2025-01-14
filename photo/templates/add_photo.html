@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Add Photo{% endblock %}
+
+{% block content %}
+<div class="flex items-center justify-center min-h-screen bg-gray-400">
+    <div class="bg-blue-300 p-8 rounded-lg shadow-md w-full max-w-lg">
+        <h1 class="text-2xl font-bold text-center text-gray-800 mb-6">Add a New Photo</h1>
+
+        {% if user.is_authenticated %}
+            <p class="text-center text-gray-700 mb-4">
+                Welcome, <span class="font-semibold">{{ user.username }}</span>! 
+                <a href="{% url 'logout' %}" class="text-blue-500 hover:underline">Logout</a>
+            </p>
+            <div class="text-center mb-6">
+                <a href="{% url 'home' %}" class="text-blue-500 hover:underline">Back to Gallery</a>
+            </div>
+        {% endif %}
+
+        <form method="post" enctype="multipart/form-data" class="space-y-4">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                Upload Photo
+            </button>
+        </form>
+
+        {% if form.errors %}
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded mt-4">
+                <ul class="list-disc pl-5">
+                    {% for field, errors in form.errors.items %}
+                        <li><strong>{{ field }}</strong>: {{ errors|join:", " }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
