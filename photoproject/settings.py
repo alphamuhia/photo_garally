@@ -15,12 +15,11 @@ import cloudinary
 import cloudinary.uploader
 import cloudinary.api
 import dj_database_url
-from decouple import config
 
 cloudinary.config(
-    cloud_name = config('CLOUD_NAME'),
-    api_key = config('API_KEY'),
-    api_secret = config('API_SECRET'),
+    cloud_name = 'dngkejdkt',
+    api_key = '214292163511661',
+    api_secret = 'oXb6LdicU1pGb3SSH7vicgscEFA',
     secure = True
 )
 
@@ -32,12 +31,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-m&!il93%nfu7oky6+w4)g07uohu(=#y83n-u7$f93hiixeuc4)'
+SECRET_KEY = 'django-insecure-+!mx)x*qh+m!0xshlnji*xhyl32tg^k%9klb!p^u-1gjdy$obo'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+
 
 # Application definition
 
@@ -108,7 +109,7 @@ MEDIA_URL = '/media/'
 # }
 
 DATABASES = {
-    'default' : dj_database_url.parse(config('DATABASE_URL'))
+    'default' : dj_database_url.parse('postgresql://database_xft5_user:Lvrwrw4KG7SmViaqmsDf0Lgw75klxEf7@dpg-ctv8if1opnds739d4190-a.oregon-postgres.render.com/database_xft5')
 }
 
 
