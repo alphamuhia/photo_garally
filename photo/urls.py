@@ -1,5 +1,6 @@
 from django.urls import path
 from photo.views import home, register, user_login, user_logout, profile, photo_details, like_photo, dislike_photo, add_photo
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 
 urlpatterns = [
@@ -13,4 +14,6 @@ urlpatterns = [
     path('like/<int:photo_id>/', like_photo, name='like_photo'),
     path('dislike/<int:photo_id>/', dislike_photo, name='dislike_photo'),
 ]
+
+urlpatterns += staticfiles_urlpatterns()
 
